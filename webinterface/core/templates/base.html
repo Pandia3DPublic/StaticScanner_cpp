@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+    <link rel="shortcut icon" size="32x32" href="{{ url_for('static', filename='icons/favicon.ico') }}">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome/css/all.css') }}" />
+    <!--load all styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500&family=Roboto&display=swap" rel="stylesheet">
+    <title>{% block title %}Home{% endblock %}</title>
+</head>
+
+{% block scripts %}{% endblock %}
+
+<body>
+    <main role="main">
+        <div>
+            {% block nav %}
+
+            {% endblock %}
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    {% block script_end %}{% endblock %}
+</body>
+
+</html>

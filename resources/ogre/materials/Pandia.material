@@ -1,0 +1,110 @@
+material Pandia/SimpleNoLight
+{
+	technique
+	{
+		pass
+		{
+			point_size 4
+			ambient vertexcolour
+			diffuse vertexcolour
+			lighting off
+			//depth_check off
+		}
+	}
+}
+material Pandia/Simple
+{
+	technique
+	{
+		pass
+		{
+			point_size 4
+			ambient vertexcolour
+			diffuse vertexcolour
+		}
+	}
+}
+
+material Pandia/SimpleNoCulling
+{
+	technique
+	{
+		pass
+		{
+			cull_hardware none
+			cull_software none
+			point_size 4
+			ambient vertexcolour
+			diffuse vertexcolour
+		}
+	}
+}
+
+material Pandia/SimpleGrey
+{
+	technique
+	{
+		pass
+		{
+
+			point_size 4
+			ambient 0.5 0.5 0.5
+			diffuse 0.5 0.5 0.5
+		}
+	}
+}
+
+material Pandia/SimpleAlpha
+{
+	technique
+	{
+		pass
+		{
+			point_size 4
+
+			ambient vertexcolour
+			diffuse vertexcolour
+			
+			//scene_blend alpha_blend
+			depth_write off
+		}
+	}
+}
+
+
+material Pandia/SimpleAlphaFOV
+{
+	technique
+	{
+		pass
+		{
+			point_size 4
+			ambient 0.6 0.1 0.7
+			diffuse 0.6 0.1 0.7
+			polygon_mode solid
+			cull_hardware none
+			cull_software none
+			scene_blend alpha_blend
+			depth_write off
+			lighting off
+			point_size 5.0
+		}
+	}
+}
+material Pandia/SimpleAlphaWire
+{
+	technique
+	{
+		pass
+		{
+			ambient 1 1 1
+			diffuse 1 1 1
+			polygon_mode wireframe
+			depth_bias 1 0
+			cull_hardware none
+			cull_software none
+			lighting off
+			line_width 1.5
+		}
+	}
+}

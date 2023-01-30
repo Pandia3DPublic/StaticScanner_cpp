@@ -1,0 +1,10 @@
+build*/
+.vscode/
+3rdParty/ogre/install/
+3rdParty/ogre/build/
+resources/models*/
+resources/config/
+resources/allmodels/
+resources/pcdModels/
+setup/temp/
+webinterface/venv

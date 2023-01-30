@@ -1,0 +1,28 @@
+.trackerbadge {
+    margin: 5px;
+}
+
+.badgemarker {
+    margin: 5px;
+}
+
+body {
+    overflow: hidden;
+}
+
+select {
+    font-family: "Roboto", 'Font Awesome';
+    font-weight: 900;
+}
+
+.leaflet-tooltip-own {
+     border: 0px solid rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0);
+}
+
+fullimage {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}

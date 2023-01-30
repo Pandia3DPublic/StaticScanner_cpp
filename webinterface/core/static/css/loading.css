@@ -1,0 +1,35 @@
+
+#companylogoimage{
+    width: 100%;
+
+    animation:spin 4s ease-in-out infinite;
+}
+
+@keyframes spin {
+    100% {
+        transform:rotate(360deg);
+    }
+}
+
+
+#companynameimage{
+    width: 100%;
+}
+
+.container-fluid{
+}
+
+.image_colum{
+    height: 40%;
+    width: 100%;
+    border: #0a58ca solid thin;
+    background: rgba(13, 202, 240, 0.32);
+    display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+
+
+
+

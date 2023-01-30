@@ -1,0 +1,16 @@
+#config parameters
+#edge length of the calibration chessboard
+SquareLength = 0.0485
+#number of inner cornners of the calibration chessboard along one axis
+Pattern_w = 9
+#number of inner cornners of the calibration chessboard along the other axis
+Pattern_h = 6
+#depracated todo remove
+Clearheight = 0.3
+#noise of the depth camera at the silo walls. All smaller things get cut
+VolumeNoise = -0.012
+ColorMinThreshold = 0.005
+ColorMaxThreshold = 0.005
+# Scanning variables
+UseVoxelGrid = 0
+RefineAlignWithCAD = 1

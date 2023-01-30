@@ -1,0 +1,5 @@
+Note:
+
+- SdkTrays.zip has the gui design elements for tray buttons, font, cursor etc.
+- SdkTrays.zip is copied via Cmake to 3rdParty/ogre/install/share/OGRE/Media/packs
+- SdkTrays_original.zip is the default one from ogre

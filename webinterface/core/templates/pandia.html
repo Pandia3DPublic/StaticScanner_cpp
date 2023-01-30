@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% block scripts %}
+<script src="https://cdn.socket.io/4.4.0/socket.io.min.js"
+    integrity="sha384-1fOn6VtTq3PWwfsOrk45LnYcGosJwzMHv+Xh/Jx5303FVOXzEnw0EpLv30mtjmlj"
+    crossorigin="anonymous"></script>
+<!-- <script src="{{ url_for('static', filename='js/socket.io.min.js') }}"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+<link rel="manifest" href="{{ url_for('static', filename='json/manifest.json') }}">
+
+{% endblock %}
+
+{% block content %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="{{ url_for('static', filename='icons/LogoWhite.png') }}" height="70">
+            <!-- <i class="far fa-user"></i> -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <!-- <span class="navbar-toggler-icon"></span> -->
+            </button>
+        </a>
+        <div class="collapse navbar-collapse collapse-horizontal " id="navbarNav">
+            <ul class="navbar-nav ">
+                <li class="nav-item ">
+                    <a class="btn btn-success" aria-current="page" href="#">Volume Scanner</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+<div class="container-fluid">
+    <div class="overflow-auto">
+        <div class="row gy-5 align-items-center">
+            <div class="col col-6">
+                <img id="CameraImage" src="" class="img-fluid" onclick="toogleOverlay()">
+            </div>
+
+            <div class="col col-6">
+                <div class="row row-11">
+                    <canvas id="line-chart"></canvas>
+                </div>
+                <div class="row row-1">
+                    <p id="Zahl" style = "font-size:20px" class="">Volume in liters: </p>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row gy-5 align-items-center">
+            <div class="col col-3"> </div>
+            <div class="col col-6">
+                <img id="DepthImage" src="" class="img-fluid">
+            </div>
+            <div class="col col-3"> </div>
+
+        </div> -->
+    </div>
+</div>
+
+<script>
+    const socket = io();
+    var overlayImageEnabled = true
+
+
+    let chartVolume = new Chart(document.getElementById("line-chart"), {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                data: [],
+                label: "Volume",
+                backgroundColor: "#3e95cd",
+                borderColor: "#3e95cd",
+                fill: true
+            }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    min: 0,
+                    // max: 5,
+                },
+
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Volume in Liters'
+                }
+            },
+        }
+
+    });
+    socket.on('neuesVolumen', function (data) {
+        // console.log("receiving volume data")
+        var date = new Date();
+        var rounded =  Math.round(data['datensatz'] * 100) / 100
+        chartVolume.data.labels.push(date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds());
+        chartVolume.data.datasets[0].data.push(rounded);
+        if (chartVolume.data.datasets[0].data.length > 20) {
+            chartVolume.data.datasets[0].data.splice(0, 1);
+            chartVolume.data.labels.splice(0, 1);
+        }
+        chartVolume.update();
+        Zahl.innerHTML = "Current volume in liters: " + rounded
+    })
+
+    socket.on('newCameraImage', function (data) {
+        let streamdata = "data:image/jpg;charset=utf-8;base64," + new Uint8Array(data['payload']).reduce((data, byte) => data + String.fromCharCode(byte), '');
+        CameraImage.src = streamdata;
+    })
+
+    function toogleOverlay() {
+        overlayImageEnabled = !overlayImageEnabled
+        socket.emit("receiveOverlayToogle", { "overlayToogle": overlayImageEnabled });   // The function returns the product of p1 and p2
+        
+    }
+
+
+</script>
+{% endblock %}
